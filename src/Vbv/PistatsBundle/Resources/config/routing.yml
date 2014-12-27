@@ -1,0 +1,33 @@
+vbv_pistats_user:
+    resource: "@VbvPistatsBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+vbv_pistats_homepage:
+    path:     /
+    defaults: { _controller: VbvPistatsBundle:Main:index }
+
+login:
+    path: login
+    defaults: { _controller: VbvPistatsBundle:Security:login }
+
+login_check:
+    path: /login_check
+
+logout:
+    pattern: /logout
+
+modal_user_admin:
+    pattern: /modal/user-admin
+    defaults: { _controller: VbvPistatsBundle:Main:modalUserAdmin }
+
+get_temperatures:
+    pattern: /get-temperatures
+    defaults: { _controller: VbvPistatsBundle:Main:getTemperatures }
+
+notify_temperature_alert:
+    pattern: /notify-temperature-alert
+    defaults: { _controller: VbvPistatsBundle:Main:notifyTemperatureAlert }
+
+config_modal:
+    path: /config-modal
+    defaults: { _controller: VbvPistatsBundle:Main:configModal }

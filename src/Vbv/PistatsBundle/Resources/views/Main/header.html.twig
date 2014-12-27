@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('vbv_pistats_homepage') }}">Pistats</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="role-label">Rol: [{% if is_granted('ROLE_ADMIN') %}Administrador{% elseif is_granted('ROLE_USER') %}Usuario{% endif %}]</li>
+                <li class="" id="status"><a href="{{ path('vbv_pistats_homepage') }}">Estado<span class="sr-only">(current)</span></a></li>
+                {% if is_granted('ROLE_ADMIN') %} <li id="user-admin"><a href="{{ path('user') }}">Administración de usuarios</a></li>{% endif %}
+                <li id="user-config"><a href="#" data-toggle="modal" data-target="#user-config-modal">Configuracion de usuario</a></li>
+                <li id="logout"><a href="{{ path('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% include 'VbvPistatsBundle:Main:userConfigModal.html.twig' %}
+    
+{#     {% if is_granted('ROLE_ADMIN') %}
+        <script>
+            $(document).ready(function(){
+                $('#modal-container').load('{{ path('user_new') }}');
+            });
+        </script>
+    {% endif %} #}

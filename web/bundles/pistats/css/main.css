@@ -1,0 +1,30 @@
+body {
+    padding-top: 50px;
+}
+
+main {
+    margin-top: 20px;
+}
+
+#role-label {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    display: block;
+    height: 50px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: rgba(0, 0, 0, 0.247059) 0px -1px 0px;
+    /*width: 187.1875px;*/
+    perspective-origin: 93.59375px 25px;
+    transform-origin: 93.59375px 25px;
+    border: 0px none rgb(157, 157, 157);
+    font: normal normal 900 normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    outline: rgb(157, 157, 157) none 0px;
+    padding: 15px;
+}
+
+#admin-panel {
+    max-width: 600px;
+}

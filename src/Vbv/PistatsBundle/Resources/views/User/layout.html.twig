@@ -1,0 +1,18 @@
+    <div class="container">
+		<div class="row">
+				{# <div class="col-md-8 col-md-offset-2"> #}
+
+		    <div id="admin-panel" class="panel panel-info center-block">
+		    	<div class="panel-heading">
+		    		Administracion de usuarios
+		    	</div>
+				<div class="panel-body">
+					    	{% include 'VbvPistatsBundle:User:nav.html.twig' %}
+							<hr>
+							{% block user_main %}
+							{% endblock %}
+				</div>
+			</div>
+			{# </div> #}
+		</div>
+	</div>

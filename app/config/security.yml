@@ -1,0 +1,38 @@
+security:
+
+    firewalls:
+        main:
+            pattern: /.*
+            security: true
+            anonymous: true
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                default_target_path: /
+            logout:
+                path: /logout
+                target: /login
+
+    encoders:
+        Symfony\Component\Security\Core\User\User:  plaintext
+        Vbv\PistatsBundle\Entity\User: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
+
+    providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, user_db]
+        in_memory:
+            memory:
+                users:
+                    admin: {password: 1234, roles: ROLE_ADMIN}
+        user_db:
+            entity: { class: VbvPistatsBundle:User, property: username}
+
+    access_control:
+        - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /user, roles: ROLE_ADMIN }
+        - { path: /.*, roles: ROLE_USER }
+        - { path: ^/modal/user-admin, roles: ROLE_ADMIN}

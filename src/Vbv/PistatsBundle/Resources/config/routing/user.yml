@@ -1,0 +1,38 @@
+user:
+    path:     /
+    defaults: { _controller: "VbvPistatsBundle:User:index" }
+
+user_show:
+    path:     /{id}/show
+    defaults: { _controller: "VbvPistatsBundle:User:show" }
+
+user_new:
+    path:     /new
+    defaults: { _controller: "VbvPistatsBundle:User:new" }
+
+user_create:
+    path:     /create
+    defaults: { _controller: "VbvPistatsBundle:User:create" }
+    requirements: { _method: post }
+
+user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VbvPistatsBundle:User:edit" }
+
+user_update:
+    path:     /{id}/update
+    defaults: { _controller: "VbvPistatsBundle:User:update" }
+    requirements: { _method: post|put }
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VbvPistatsBundle:User:delete" }
+    requirements: { _method: post|delete }
+
+user_get_data:
+    path:     /get-data
+    defaults: { _controller: "VbvPistatsBundle:User:getUserData" }
+
+user_set_data:
+    path:     /set-data
+    defaults: { _controller: "VbvPistatsBundle:User:setUserData" }

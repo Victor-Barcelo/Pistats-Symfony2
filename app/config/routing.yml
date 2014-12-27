@@ -1,0 +1,3 @@
+vbv_pistats:
+    resource: "@VbvPistatsBundle/Resources/config/routing.yml"
+    prefix:   /

@@ -1,0 +1,36 @@
+{% extends 'VbvPistatsBundle:Main:layout.html.twig' %}
+{% block main %}
+    {% embed 'VbvPistatsBundle:User:layout.html.twig' %}    
+        {% block user_main %}
+            {{ parent() }}
+
+			    {{ form(form) }}
+
+				<script>
+				    $('#list-tab').removeClass('active');
+				    $('#new-tab').addClass('active');
+				    $('#show-tab').addClass('disable');
+				    $('#edit-tab').addClass('disable');
+				</script>
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{# {% extends 'VbvPistatsBundle:Main:layout.html.twig' %}
+
+{% block title %} Pistats {% endblock %}
+
+{% block main %}
+    {% include 'VbvPistatsBundle:User:nav.html.twig' %}
+	
+    {{ form(form) }}
+
+	<script>
+	    $('#list-tab').removeClass('active');
+	    $('#new-tab').addClass('active');
+	    $('#show-tab').addClass('disable');
+	    $('#edit-tab').addClass('disable');
+	</script>
+
+{% endblock %} #}
