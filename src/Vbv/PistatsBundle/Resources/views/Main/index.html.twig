@@ -8,7 +8,7 @@
 	
 	<div class="container-fluid main-section">
 
-	  <div class="row"> 
+{# 	  <div class="row"> 
 	    <div class="col-md-12 main">
 	      <div class="panel panel-primary">
 	        <div class="panel-heading">Información</div>
@@ -39,19 +39,46 @@
 	      </div>
 	    </div>
 	  </div>
-	  
-	  <div class="row" >  
-	    <div class="col-md-12 main">
-	      <div class="panel panel-primary" id="map-container">
-	        <div class="panel-heading">Registro de temperatura<button type="button" id="chart-refresh_btn" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></div>
-	        <div class="panel-body" id="chart-div">
+ #}	  
 
+		<script type="text/javascript">
+		    {{ chart(tempChart) }}
+		    {{ chart(lightChart) }}
+		</script>
+
+      <div class="row" >  
+	    <div class="col-md-12 main">
+	      <div class="panel panel-primary">
+	        <div class="panel-heading">Registro de temperatura</div>
+	        <div class="panel-body">
+	        	<div id="tempChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 	        </div>
 	      </div>
 	    </div>
 	  </div>
-	
-	</div>
+
+      <div class="row" >  
+	    <div class="col-md-12 main">
+	      <div class="panel panel-primary">
+	        <div class="panel-heading">Registro de luminosidad</div>
+	        <div class="panel-body">
+	        	<div id="lightChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	  
+{# 	  <div class="row" >  
+	    <div class="col-md-12 main">
+	      <div class="panel panel-primary" id="map-container">
+	        <div class="panel-heading">Registro de temperatura<button type="button" id="chart-refresh_btn" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></div>
+	        <div class="panel-body" id="chart-div">
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+ #}	
+	</div> {# main-section #}
 
 </div>
 
@@ -60,11 +87,11 @@
 {% block footer %}
     {% block inlinejs %}
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		<script type="text/javascript" src="{{ asset('bundles/pistats/js/temperature_chart.js') }}"></script>
+		{# <script type="text/javascript" src="{{ asset('bundles/pistats/js/temperature_chart.js') }}"></script>#}
+		<script src="//code.highcharts.com/4.0.1/highcharts.js"></script>
+		<script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script>
         <script type="text/javascript">
             window.onload = function() {
-                // $("#header-but-search").addClass("active");
-                // $("#header-but-create").removeClass("active");
             };
         </script>
     {% endblock %}

@@ -18,6 +18,7 @@
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="VbvPistatsBundle">Vbv\PistatsBundle\VbvPistatsBundle</parameter>
       <parameter key="EndroidTwitterBundle">Endroid\Bundle\TwitterBundle\EndroidTwitterBundle</parameter>
+      <parameter key="ObHighchartsBundle">Ob\HighchartsBundle\ObHighchartsBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -575,6 +576,7 @@
     <parameter key="endroid.twitter.access_token">2881863592-iAQEp0OnHq6Q9Anu47ZRCnBbMjJuHXLUgdcTFyT</parameter>
     <parameter key="endroid.twitter.access_token_secret">Qqf4Z8uyRjevU3KYFEewsqLghvZRotGsIy3m3vlrTFnxU</parameter>
     <parameter key="endroid.twitter.api_url">null</parameter>
+    <parameter key="ob_highcharts.twig_extension.class">Ob\HighchartsBundle\Twig\HighchartsExtension</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -1809,7 +1811,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5488585bed647</argument>
+            <argument>549f1adddcd16</argument>
           </service>
         </argument>
       </argument>
@@ -2112,7 +2114,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5488585bed647</argument>
+            <argument>549f1adddcd16</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2359,6 +2361,9 @@
             <tag name="twig.extension"/>
           </service>
         </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="ob_highcharts.twig.highcharts_extension"/>
       </call>
       <call method="addExtension">
         <argument type="service">
@@ -2836,6 +2841,9 @@
       <argument>2881863592-iAQEp0OnHq6Q9Anu47ZRCnBbMjJuHXLUgdcTFyT</argument>
       <argument>Qqf4Z8uyRjevU3KYFEewsqLghvZRotGsIy3m3vlrTFnxU</argument>
       <argument>null</argument>
+    </service>
+    <service id="ob_highcharts.twig.highcharts_extension" class="Ob\HighchartsBundle\Twig\HighchartsExtension">
+      <tag name="twig.extension"/>
     </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig"/>

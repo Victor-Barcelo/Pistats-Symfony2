@@ -42,76 +42,72 @@ class __TwigTemplate_58e0b0f66e5b5a41a07d0bee72dae6264b762f518f1d88460d3a52691b9
 \t
 \t<div class=\"container-fluid main-section\">
 
-\t  <div class=\"row\"> 
+";
+        // line 42
+        echo "\t  
+
+\t\t<script type=\"text/javascript\">
+\t\t    ";
+        // line 45
+        echo $this->env->getExtension('highcharts_extension')->chart((isset($context["tempChart"]) ? $context["tempChart"] : $this->getContext($context, "tempChart")));
+        echo "
+\t\t    ";
+        // line 46
+        echo $this->env->getExtension('highcharts_extension')->chart((isset($context["lightChart"]) ? $context["lightChart"] : $this->getContext($context, "lightChart")));
+        echo "
+\t\t</script>
+
+      <div class=\"row\" >  
 \t    <div class=\"col-md-12 main\">
 \t      <div class=\"panel panel-primary\">
-\t        <div class=\"panel-heading\">Información</div>
+\t        <div class=\"panel-heading\">Registro de temperatura</div>
 \t        <div class=\"panel-body\">
-\t          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-\t          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-\t          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-\t          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-\t          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-\t          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\t        \t<div id=\"tempChart\" style=\"min-width: 400px; height: 400px; margin: 0 auto\"></div>
 \t        </div>
 \t      </div>
 \t    </div>
 \t  </div>
 
-\t  <div class=\"row\">
+      <div class=\"row\" >  
 \t    <div class=\"col-md-12 main\">
 \t      <div class=\"panel panel-primary\">
-\t        <div class=\"panel-heading\">Almacenamiento</div>
+\t        <div class=\"panel-heading\">Registro de luz</div>
 \t        <div class=\"panel-body\">
-\t          <p><?=\$disk_info['name']?> (<?=\$disk_info['max_capacity']?>) - <?=\$disk_info['usage']?> Disponibles</p>  
-\t          <div class=\"progress\">
-\t            <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: <?=\$disk_info['usage_percent']?>%;\">
-\t              <?=\$disk_info['usage_percent']?> %
-\t            </div>
-\t          </div>    
+\t        \t<div id=\"lightChart\" style=\"min-width: 400px; height: 400px; margin: 0 auto\"></div>
 \t        </div>
 \t      </div>
 \t    </div>
 \t  </div>
 \t  
-\t  <div class=\"row\" >  
-\t    <div class=\"col-md-12 main\">
-\t      <div class=\"panel panel-primary\" id=\"map-container\">
-\t        <div class=\"panel-heading\">Registro de temperatura<button type=\"button\" id=\"chart-refresh_btn\" class=\"btn btn-info btn-xs pull-right\"><span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span></button></div>
-\t        <div class=\"panel-body\" id=\"chart-div\">
-
-\t        </div>
-\t      </div>
-\t    </div>
-\t  </div>
-\t
-\t</div>
-
+";
+        // line 80
+        echo "\t
+\t</div> ";
+        // line 82
+        echo "
 </div>
 
 ";
     }
 
-    // line 60
+    // line 87
     public function block_footer($context, array $blocks = array())
     {
-        // line 61
+        // line 88
         echo "    ";
         $this->displayBlock('inlinejs', $context, $blocks);
     }
 
     public function block_inlinejs($context, array $blocks = array())
     {
-        // line 62
+        // line 89
         echo "\t\t<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>
-\t\t<script type=\"text/javascript\" src=\"";
-        // line 63
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/pistats/js/temperature_chart.js"), "html", null, true);
-        echo "\"></script>
+\t\t";
+        // line 91
+        echo "\t\t<script src=\"//code.highcharts.com/4.0.1/highcharts.js\"></script>
+\t\t<script src=\"//code.highcharts.com/4.0.1/modules/exporting.js\"></script>
         <script type=\"text/javascript\">
             window.onload = function() {
-                // \$(\"#header-but-search\").addClass(\"active\");
-                // \$(\"#header-but-create\").removeClass(\"active\");
             };
         </script>
     ";
@@ -129,6 +125,6 @@ class __TwigTemplate_58e0b0f66e5b5a41a07d0bee72dae6264b762f518f1d88460d3a52691b9
 
     public function getDebugInfo()
     {
-        return array (  109 => 63,  106 => 62,  99 => 61,  96 => 60,  40 => 6,  37 => 5,  31 => 3,);
+        return array (  107 => 91,  104 => 89,  97 => 88,  94 => 87,  87 => 82,  84 => 80,  56 => 46,  52 => 45,  47 => 42,  40 => 6,  37 => 5,  31 => 3,);
     }
 }
