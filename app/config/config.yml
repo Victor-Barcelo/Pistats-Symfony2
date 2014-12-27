@@ -56,7 +56,7 @@ doctrine:
                 user:     "%database_user%"
                 password: "%database_password%"
                 charset:  UTF8
-            temperature:
+            crocweb:
                 driver:   'pdo_mysql'
                 host:     'victorbarcelo.net'
                 port:     null
@@ -72,8 +72,8 @@ doctrine:
                 connection: default
                 mappings:
                     VbvPistatsBundle: ~
-            temperature:
-                connection: temperature
+            crocweb:
+                connection: crocweb
                 mappings:
                     VbvPistatsBundle: ~
 

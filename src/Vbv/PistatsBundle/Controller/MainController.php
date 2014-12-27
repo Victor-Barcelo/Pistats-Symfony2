@@ -48,7 +48,7 @@ class MainController extends Controller
     }
 
     private function getTemperaturesArray(){
-        $repo = $this->get('doctrine')->getManager('temperature')->getRepository('VbvPistatsBundle:Temperature');
+        $repo = $this->get('doctrine')->getManager('crocweb')->getRepository('VbvPistatsBundle:Temperature');
         $temps = $repo->findAll();
         $tempsArray = array();
         foreach ($temps as $temp) 
@@ -66,7 +66,6 @@ class MainController extends Controller
         {
             array_push($data, array($dataArray['time'] *1000 , $dataArray['light']));
         }
-        // print_r($data);
         $ob = new Highchart();
         $ob->chart->renderTo('lightChart');
         $ob->chart->type('spline');
@@ -93,11 +92,8 @@ class MainController extends Controller
     }
 
     private function getLightsArray(){
-        $repo = $this->get('doctrine')->getManager('temperature')->getRepository('VbvPistatsBundle:Light');
+        $repo = $this->get('doctrine')->getManager('crocweb')->getRepository('VbvPistatsBundle:Light');
         $lights = $repo->findAll();
-        
-        print_r($lights);
-        
         $lightsArray = array();
         foreach ($lights as $light) 
         {
@@ -105,10 +101,6 @@ class MainController extends Controller
         }
         return $lightsArray;   
     }
-
-
-
-
 
     public function notifyTemperatureAlertAction(Request $request)
     {

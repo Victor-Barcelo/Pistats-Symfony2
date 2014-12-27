@@ -46,16 +46,16 @@ class __TwigTemplate_58e0b0f66e5b5a41a07d0bee72dae6264b762f518f1d88460d3a52691b9
         // line 42
         echo "\t  
 
-\t\t<script type=\"text/javascript\">
-\t\t    ";
+\t  <script type=\"text/javascript\">
+\t    ";
         // line 45
         echo $this->env->getExtension('highcharts_extension')->chart((isset($context["tempChart"]) ? $context["tempChart"] : $this->getContext($context, "tempChart")));
         echo "
-\t\t    ";
+\t    ";
         // line 46
         echo $this->env->getExtension('highcharts_extension')->chart((isset($context["lightChart"]) ? $context["lightChart"] : $this->getContext($context, "lightChart")));
         echo "
-\t\t</script>
+\t  </script>
 
       <div class=\"row\" >  
 \t    <div class=\"col-md-12 main\">
@@ -71,7 +71,7 @@ class __TwigTemplate_58e0b0f66e5b5a41a07d0bee72dae6264b762f518f1d88460d3a52691b9
       <div class=\"row\" >  
 \t    <div class=\"col-md-12 main\">
 \t      <div class=\"panel panel-primary\">
-\t        <div class=\"panel-heading\">Registro de luz</div>
+\t        <div class=\"panel-heading\">Registro de luminosidad</div>
 \t        <div class=\"panel-body\">
 \t        \t<div id=\"lightChart\" style=\"min-width: 400px; height: 400px; margin: 0 auto\"></div>
 \t        </div>

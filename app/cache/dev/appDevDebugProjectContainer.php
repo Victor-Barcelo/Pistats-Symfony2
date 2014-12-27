@@ -548,7 +548,7 @@ class appDevDebugProjectContainer extends Container
             'doctrine.class' => 'Doctrine\\Bundle\\DoctrineBundle\\Registry',
             'doctrine.entity_managers' => array(
                 'default' => 'doctrine.orm.default_entity_manager',
-                'temperature' => 'doctrine.orm.temperature_entity_manager',
+                'crocweb' => 'doctrine.orm.crocweb_entity_manager',
             ),
             'doctrine.default_entity_manager' => 'default',
             'doctrine.dbal.connection_factory.types' => array(
@@ -556,7 +556,7 @@ class appDevDebugProjectContainer extends Container
             ),
             'doctrine.connections' => array(
                 'default' => 'doctrine.dbal.default_connection',
-                'temperature' => 'doctrine.dbal.temperature_connection',
+                'crocweb' => 'doctrine.dbal.crocweb_connection',
             ),
             'doctrine.default_connection' => 'default',
             'doctrine.orm.configuration.class' => 'Doctrine\\ORM\\Configuration',
@@ -726,26 +726,26 @@ class appDevDebugProjectContainer extends Container
             'debug.templating.engine.php' => 'getDebug_Templating_Engine_PhpService',
             'doctrine' => 'getDoctrineService',
             'doctrine.dbal.connection_factory' => 'getDoctrine_Dbal_ConnectionFactoryService',
+            'doctrine.dbal.crocweb_connection' => 'getDoctrine_Dbal_CrocwebConnectionService',
             'doctrine.dbal.default_connection' => 'getDoctrine_Dbal_DefaultConnectionService',
             'doctrine.dbal.logger' => 'getDoctrine_Dbal_LoggerService',
+            'doctrine.dbal.logger.profiling.crocweb' => 'getDoctrine_Dbal_Logger_Profiling_CrocwebService',
             'doctrine.dbal.logger.profiling.default' => 'getDoctrine_Dbal_Logger_Profiling_DefaultService',
-            'doctrine.dbal.logger.profiling.temperature' => 'getDoctrine_Dbal_Logger_Profiling_TemperatureService',
-            'doctrine.dbal.temperature_connection' => 'getDoctrine_Dbal_TemperatureConnectionService',
+            'doctrine.orm.crocweb_entity_listener_resolver' => 'getDoctrine_Orm_CrocwebEntityListenerResolverService',
+            'doctrine.orm.crocweb_entity_manager' => 'getDoctrine_Orm_CrocwebEntityManagerService',
+            'doctrine.orm.crocweb_manager_configurator' => 'getDoctrine_Orm_CrocwebManagerConfiguratorService',
             'doctrine.orm.default_entity_listener_resolver' => 'getDoctrine_Orm_DefaultEntityListenerResolverService',
             'doctrine.orm.default_entity_manager' => 'getDoctrine_Orm_DefaultEntityManagerService',
             'doctrine.orm.default_manager_configurator' => 'getDoctrine_Orm_DefaultManagerConfiguratorService',
             'doctrine.orm.naming_strategy.default' => 'getDoctrine_Orm_NamingStrategy_DefaultService',
-            'doctrine.orm.temperature_entity_listener_resolver' => 'getDoctrine_Orm_TemperatureEntityListenerResolverService',
-            'doctrine.orm.temperature_entity_manager' => 'getDoctrine_Orm_TemperatureEntityManagerService',
-            'doctrine.orm.temperature_manager_configurator' => 'getDoctrine_Orm_TemperatureManagerConfiguratorService',
             'doctrine.orm.validator.unique' => 'getDoctrine_Orm_Validator_UniqueService',
             'doctrine.orm.validator_initializer' => 'getDoctrine_Orm_ValidatorInitializerService',
+            'doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_CrocwebMetadataCacheService',
+            'doctrine_cache.providers.doctrine.orm.crocweb_query_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_CrocwebQueryCacheService',
+            'doctrine_cache.providers.doctrine.orm.crocweb_result_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_CrocwebResultCacheService',
             'doctrine_cache.providers.doctrine.orm.default_metadata_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultMetadataCacheService',
             'doctrine_cache.providers.doctrine.orm.default_query_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultQueryCacheService',
             'doctrine_cache.providers.doctrine.orm.default_result_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultResultCacheService',
-            'doctrine_cache.providers.doctrine.orm.temperature_metadata_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_TemperatureMetadataCacheService',
-            'doctrine_cache.providers.doctrine.orm.temperature_query_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_TemperatureQueryCacheService',
-            'doctrine_cache.providers.doctrine.orm.temperature_result_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_TemperatureResultCacheService',
             'endroid.twitter' => 'getEndroid_TwitterService',
             'file_locator' => 'getFileLocatorService',
             'filesystem' => 'getFilesystemService',
@@ -943,13 +943,13 @@ class appDevDebugProjectContainer extends Container
             'console.command.sensiolabs_security_command_securitycheckercommand' => 'sensio_distribution.security_checker.command',
             'database_connection' => 'doctrine.dbal.default_connection',
             'debug.templating.engine.twig' => 'templating',
+            'doctrine.orm.crocweb_metadata_cache' => 'doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache',
+            'doctrine.orm.crocweb_query_cache' => 'doctrine_cache.providers.doctrine.orm.crocweb_query_cache',
+            'doctrine.orm.crocweb_result_cache' => 'doctrine_cache.providers.doctrine.orm.crocweb_result_cache',
             'doctrine.orm.default_metadata_cache' => 'doctrine_cache.providers.doctrine.orm.default_metadata_cache',
             'doctrine.orm.default_query_cache' => 'doctrine_cache.providers.doctrine.orm.default_query_cache',
             'doctrine.orm.default_result_cache' => 'doctrine_cache.providers.doctrine.orm.default_result_cache',
             'doctrine.orm.entity_manager' => 'doctrine.orm.default_entity_manager',
-            'doctrine.orm.temperature_metadata_cache' => 'doctrine_cache.providers.doctrine.orm.temperature_metadata_cache',
-            'doctrine.orm.temperature_query_cache' => 'doctrine_cache.providers.doctrine.orm.temperature_query_cache',
-            'doctrine.orm.temperature_result_cache' => 'doctrine_cache.providers.doctrine.orm.temperature_result_cache',
             'event_dispatcher' => 'debug.event_dispatcher',
             'mailer' => 'swiftmailer.mailer.default',
             'sensio.distribution.webconfigurator' => 'sensio_distribution.webconfigurator',
@@ -1269,7 +1269,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrineService()
     {
-        return $this->services['doctrine'] = new \Doctrine\Bundle\DoctrineBundle\Registry($this, array('default' => 'doctrine.dbal.default_connection', 'temperature' => 'doctrine.dbal.temperature_connection'), array('default' => 'doctrine.orm.default_entity_manager', 'temperature' => 'doctrine.orm.temperature_entity_manager'), 'default', 'default');
+        return $this->services['doctrine'] = new \Doctrine\Bundle\DoctrineBundle\Registry($this, array('default' => 'doctrine.dbal.default_connection', 'crocweb' => 'doctrine.dbal.crocweb_connection'), array('default' => 'doctrine.orm.default_entity_manager', 'crocweb' => 'doctrine.orm.crocweb_entity_manager'), 'default', 'default');
     }
 
     /**
@@ -1283,6 +1283,26 @@ class appDevDebugProjectContainer extends Container
     protected function getDoctrine_Dbal_ConnectionFactoryService()
     {
         return $this->services['doctrine.dbal.connection_factory'] = new \Doctrine\Bundle\DoctrineBundle\ConnectionFactory(array());
+    }
+
+    /**
+     * Gets the 'doctrine.dbal.crocweb_connection' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Doctrine\DBAL\Connection A Doctrine\DBAL\Connection instance.
+     */
+    protected function getDoctrine_Dbal_CrocwebConnectionService()
+    {
+        $a = new \Doctrine\DBAL\Logging\LoggerChain();
+        $a->addLogger($this->get('doctrine.dbal.logger'));
+        $a->addLogger($this->get('doctrine.dbal.logger.profiling.crocweb'));
+
+        $b = new \Doctrine\DBAL\Configuration();
+        $b->setSQLLogger($a);
+
+        return $this->services['doctrine.dbal.crocweb_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => 'victorbarcelo.net', 'port' => NULL, 'dbname' => 'victorba_igni941', 'user' => 'victorba_igni941', 'password' => 'f(hP6(92S5', 'charset' => 'UTF8', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
     }
 
     /**
@@ -1306,23 +1326,63 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'doctrine.dbal.temperature_connection' service.
+     * Gets the 'doctrine.orm.crocweb_entity_listener_resolver' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Doctrine\DBAL\Connection A Doctrine\DBAL\Connection instance.
+     * @return \Doctrine\ORM\Mapping\DefaultEntityListenerResolver A Doctrine\ORM\Mapping\DefaultEntityListenerResolver instance.
      */
-    protected function getDoctrine_Dbal_TemperatureConnectionService()
+    protected function getDoctrine_Orm_CrocwebEntityListenerResolverService()
     {
-        $a = new \Doctrine\DBAL\Logging\LoggerChain();
-        $a->addLogger($this->get('doctrine.dbal.logger'));
-        $a->addLogger($this->get('doctrine.dbal.logger.profiling.temperature'));
+        return $this->services['doctrine.orm.crocweb_entity_listener_resolver'] = new \Doctrine\ORM\Mapping\DefaultEntityListenerResolver();
+    }
 
-        $b = new \Doctrine\DBAL\Configuration();
-        $b->setSQLLogger($a);
+    /**
+     * Gets the 'doctrine.orm.crocweb_entity_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Doctrine\ORM\EntityManager A Doctrine\ORM\EntityManager instance.
+     */
+    protected function getDoctrine_Orm_CrocwebEntityManagerService()
+    {
+        $a = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
+        $a->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => (dirname(dirname(dirname(__DIR__))).'/src/Vbv/PistatsBundle/Entity'))), 'Vbv\\PistatsBundle\\Entity');
 
-        return $this->services['doctrine.dbal.temperature_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => 'victorbarcelo.net', 'port' => NULL, 'dbname' => 'victorba_igni941', 'user' => 'victorba_igni941', 'password' => 'f(hP6(92S5', 'charset' => 'UTF8', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        $b = new \Doctrine\ORM\Configuration();
+        $b->setEntityNamespaces(array('VbvPistatsBundle' => 'Vbv\\PistatsBundle\\Entity'));
+        $b->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache'));
+        $b->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.crocweb_query_cache'));
+        $b->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.crocweb_result_cache'));
+        $b->setMetadataDriverImpl($a);
+        $b->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
+        $b->setProxyNamespace('Proxies');
+        $b->setAutoGenerateProxyClasses(true);
+        $b->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $b->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $b->setNamingStrategy($this->get('doctrine.orm.naming_strategy.default'));
+        $b->setEntityListenerResolver($this->get('doctrine.orm.crocweb_entity_listener_resolver'));
+
+        $this->services['doctrine.orm.crocweb_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.crocweb_connection'), $b);
+
+        $this->get('doctrine.orm.crocweb_manager_configurator')->configure($instance);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'doctrine.orm.crocweb_manager_configurator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator A Doctrine\Bundle\DoctrineBundle\ManagerConfigurator instance.
+     */
+    protected function getDoctrine_Orm_CrocwebManagerConfiguratorService()
+    {
+        return $this->services['doctrine.orm.crocweb_manager_configurator'] = new \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator(array(), array());
     }
 
     /**
@@ -1386,66 +1446,6 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'doctrine.orm.temperature_entity_listener_resolver' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return \Doctrine\ORM\Mapping\DefaultEntityListenerResolver A Doctrine\ORM\Mapping\DefaultEntityListenerResolver instance.
-     */
-    protected function getDoctrine_Orm_TemperatureEntityListenerResolverService()
-    {
-        return $this->services['doctrine.orm.temperature_entity_listener_resolver'] = new \Doctrine\ORM\Mapping\DefaultEntityListenerResolver();
-    }
-
-    /**
-     * Gets the 'doctrine.orm.temperature_entity_manager' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return \Doctrine\ORM\EntityManager A Doctrine\ORM\EntityManager instance.
-     */
-    protected function getDoctrine_Orm_TemperatureEntityManagerService()
-    {
-        $a = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
-        $a->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => (dirname(dirname(dirname(__DIR__))).'/src/Vbv/PistatsBundle/Entity'))), 'Vbv\\PistatsBundle\\Entity');
-
-        $b = new \Doctrine\ORM\Configuration();
-        $b->setEntityNamespaces(array('VbvPistatsBundle' => 'Vbv\\PistatsBundle\\Entity'));
-        $b->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.temperature_metadata_cache'));
-        $b->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.temperature_query_cache'));
-        $b->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.temperature_result_cache'));
-        $b->setMetadataDriverImpl($a);
-        $b->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
-        $b->setProxyNamespace('Proxies');
-        $b->setAutoGenerateProxyClasses(true);
-        $b->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $b->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $b->setNamingStrategy($this->get('doctrine.orm.naming_strategy.default'));
-        $b->setEntityListenerResolver($this->get('doctrine.orm.temperature_entity_listener_resolver'));
-
-        $this->services['doctrine.orm.temperature_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.temperature_connection'), $b);
-
-        $this->get('doctrine.orm.temperature_manager_configurator')->configure($instance);
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'doctrine.orm.temperature_manager_configurator' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator A Doctrine\Bundle\DoctrineBundle\ManagerConfigurator instance.
-     */
-    protected function getDoctrine_Orm_TemperatureManagerConfiguratorService()
-    {
-        return $this->services['doctrine.orm.temperature_manager_configurator'] = new \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator(array(), array());
-    }
-
-    /**
      * Gets the 'doctrine.orm.validator.unique' service.
      *
      * This service is shared.
@@ -1469,6 +1469,57 @@ class appDevDebugProjectContainer extends Container
     protected function getDoctrine_Orm_ValidatorInitializerService()
     {
         return $this->services['doctrine.orm.validator_initializer'] = new \Symfony\Bridge\Doctrine\Validator\DoctrineInitializer($this->get('doctrine'));
+    }
+
+    /**
+     * Gets the 'doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Doctrine\Common\Cache\ArrayCache A Doctrine\Common\Cache\ArrayCache instance.
+     */
+    protected function getDoctrineCache_Providers_Doctrine_Orm_CrocwebMetadataCacheService()
+    {
+        $this->services['doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
+
+        $instance->setNamespace('sf2orm_crocweb_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4');
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'doctrine_cache.providers.doctrine.orm.crocweb_query_cache' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Doctrine\Common\Cache\ArrayCache A Doctrine\Common\Cache\ArrayCache instance.
+     */
+    protected function getDoctrineCache_Providers_Doctrine_Orm_CrocwebQueryCacheService()
+    {
+        $this->services['doctrine_cache.providers.doctrine.orm.crocweb_query_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
+
+        $instance->setNamespace('sf2orm_crocweb_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4');
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'doctrine_cache.providers.doctrine.orm.crocweb_result_cache' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Doctrine\Common\Cache\ArrayCache A Doctrine\Common\Cache\ArrayCache instance.
+     */
+    protected function getDoctrineCache_Providers_Doctrine_Orm_CrocwebResultCacheService()
+    {
+        $this->services['doctrine_cache.providers.doctrine.orm.crocweb_result_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
+
+        $instance->setNamespace('sf2orm_crocweb_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4');
+
+        return $instance;
     }
 
     /**
@@ -1518,57 +1569,6 @@ class appDevDebugProjectContainer extends Container
         $this->services['doctrine_cache.providers.doctrine.orm.default_result_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
 
         $instance->setNamespace('sf2orm_default_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4');
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'doctrine_cache.providers.doctrine.orm.temperature_metadata_cache' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return \Doctrine\Common\Cache\ArrayCache A Doctrine\Common\Cache\ArrayCache instance.
-     */
-    protected function getDoctrineCache_Providers_Doctrine_Orm_TemperatureMetadataCacheService()
-    {
-        $this->services['doctrine_cache.providers.doctrine.orm.temperature_metadata_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
-
-        $instance->setNamespace('sf2orm_temperature_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4');
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'doctrine_cache.providers.doctrine.orm.temperature_query_cache' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return \Doctrine\Common\Cache\ArrayCache A Doctrine\Common\Cache\ArrayCache instance.
-     */
-    protected function getDoctrineCache_Providers_Doctrine_Orm_TemperatureQueryCacheService()
-    {
-        $this->services['doctrine_cache.providers.doctrine.orm.temperature_query_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
-
-        $instance->setNamespace('sf2orm_temperature_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4');
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'doctrine_cache.providers.doctrine.orm.temperature_result_cache' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return \Doctrine\Common\Cache\ArrayCache A Doctrine\Common\Cache\ArrayCache instance.
-     */
-    protected function getDoctrineCache_Providers_Doctrine_Orm_TemperatureResultCacheService()
-    {
-        $this->services['doctrine_cache.providers.doctrine.orm.temperature_result_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
-
-        $instance->setNamespace('sf2orm_temperature_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4');
 
         return $instance;
     }
@@ -2605,7 +2605,7 @@ class appDevDebugProjectContainer extends Container
 
         $d = new \Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector($this->get('doctrine'));
         $d->addLogger('default', $this->get('doctrine.dbal.logger.profiling.default'));
-        $d->addLogger('temperature', $this->get('doctrine.dbal.logger.profiling.temperature'));
+        $d->addLogger('crocweb', $this->get('doctrine.dbal.logger.profiling.crocweb'));
 
         $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage(('file:'.__DIR__.'/profiler'), '', '', 86400), $a);
 
@@ -2871,7 +2871,7 @@ class appDevDebugProjectContainer extends Container
         $o = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $l, array(), $a);
         $o->setOptions(array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($k, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.chain_provider'), 1 => $this->get('security.user.provider.concrete.in_memory'), 2 => $this->get('security.user.provider.concrete.user_db')), 'main', $a, $c), 2 => $m, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $l, 'main', $n, $o, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '549f1adddcd16', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $k, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $l, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $l, '/login', false), NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($k, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.chain_provider'), 1 => $this->get('security.user.provider.concrete.in_memory'), 2 => $this->get('security.user.provider.concrete.user_db')), 'main', $a, $c), 2 => $m, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $l, 'main', $n, $o, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '549f1ea9cd0b2', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $k, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $l, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $l, '/login', false), NULL, NULL, $a));
     }
 
     /**
@@ -4284,6 +4284,23 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'doctrine.dbal.logger.profiling.crocweb' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return \Doctrine\DBAL\Logging\DebugStack A Doctrine\DBAL\Logging\DebugStack instance.
+     */
+    protected function getDoctrine_Dbal_Logger_Profiling_CrocwebService()
+    {
+        return $this->services['doctrine.dbal.logger.profiling.crocweb'] = new \Doctrine\DBAL\Logging\DebugStack();
+    }
+
+    /**
      * Gets the 'doctrine.dbal.logger.profiling.default' service.
      *
      * This service is shared.
@@ -4298,23 +4315,6 @@ class appDevDebugProjectContainer extends Container
     protected function getDoctrine_Dbal_Logger_Profiling_DefaultService()
     {
         return $this->services['doctrine.dbal.logger.profiling.default'] = new \Doctrine\DBAL\Logging\DebugStack();
-    }
-
-    /**
-     * Gets the 'doctrine.dbal.logger.profiling.temperature' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * This service is private.
-     * If you want to be able to request this service from the container directly,
-     * make it public, otherwise you might end up with broken code.
-     *
-     * @return \Doctrine\DBAL\Logging\DebugStack A Doctrine\DBAL\Logging\DebugStack instance.
-     */
-    protected function getDoctrine_Dbal_Logger_Profiling_TemperatureService()
-    {
-        return $this->services['doctrine.dbal.logger.profiling.temperature'] = new \Doctrine\DBAL\Logging\DebugStack();
     }
 
     /**
@@ -4385,7 +4385,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.chain_provider'), new \Symfony\Component\Security\Core\User\UserChecker(), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('549f1adddcd16')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.chain_provider'), new \Symfony\Component\Security\Core\User\UserChecker(), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('549f1ea9cd0b2')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 

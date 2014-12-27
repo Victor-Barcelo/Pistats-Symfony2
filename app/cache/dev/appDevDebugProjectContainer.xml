@@ -506,13 +506,13 @@
     <parameter key="doctrine.class">Doctrine\Bundle\DoctrineBundle\Registry</parameter>
     <parameter key="doctrine.entity_managers" type="collection">
       <parameter key="default">doctrine.orm.default_entity_manager</parameter>
-      <parameter key="temperature">doctrine.orm.temperature_entity_manager</parameter>
+      <parameter key="crocweb">doctrine.orm.crocweb_entity_manager</parameter>
     </parameter>
     <parameter key="doctrine.default_entity_manager">default</parameter>
     <parameter key="doctrine.dbal.connection_factory.types" type="collection"/>
     <parameter key="doctrine.connections" type="collection">
       <parameter key="default">doctrine.dbal.default_connection</parameter>
-      <parameter key="temperature">doctrine.dbal.temperature_connection</parameter>
+      <parameter key="crocweb">doctrine.dbal.crocweb_connection</parameter>
     </parameter>
     <parameter key="doctrine.default_connection">default</parameter>
     <parameter key="doctrine.orm.configuration.class">Doctrine\ORM\Configuration</parameter>
@@ -1492,8 +1492,8 @@
               <argument type="service" id="doctrine.dbal.logger.profiling.default"/>
             </call>
             <call method="addLogger">
-              <argument>temperature</argument>
-              <argument type="service" id="doctrine.dbal.logger.profiling.temperature"/>
+              <argument>crocweb</argument>
+              <argument type="service" id="doctrine.dbal.logger.profiling.crocweb"/>
             </call>
           </service>
         </argument>
@@ -1811,7 +1811,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>549f1adddcd16</argument>
+            <argument>549f1ea9cd0b2</argument>
           </service>
         </argument>
       </argument>
@@ -2114,7 +2114,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>549f1adddcd16</argument>
+            <argument>549f1ea9cd0b2</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2532,11 +2532,11 @@
       <argument type="service" id="service_container"/>
       <argument type="collection">
         <argument key="default">doctrine.dbal.default_connection</argument>
-        <argument key="temperature">doctrine.dbal.temperature_connection</argument>
+        <argument key="crocweb">doctrine.dbal.crocweb_connection</argument>
       </argument>
       <argument type="collection">
         <argument key="default">doctrine.orm.default_entity_manager</argument>
-        <argument key="temperature">doctrine.orm.temperature_entity_manager</argument>
+        <argument key="crocweb">doctrine.orm.crocweb_entity_manager</argument>
       </argument>
       <argument>default</argument>
       <argument>default</argument>
@@ -2576,8 +2576,8 @@
       </argument>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.dbal.logger.profiling.temperature" class="Doctrine\DBAL\Logging\DebugStack" public="false"/>
-    <service id="doctrine.dbal.temperature_connection" class="Doctrine\DBAL\Connection" factory-method="createConnection" factory-service="doctrine.dbal.connection_factory">
+    <service id="doctrine.dbal.logger.profiling.crocweb" class="Doctrine\DBAL\Logging\DebugStack" public="false"/>
+    <service id="doctrine.dbal.crocweb_connection" class="Doctrine\DBAL\Connection" factory-method="createConnection" factory-service="doctrine.dbal.connection_factory">
       <argument type="collection">
         <argument key="driver">pdo_mysql</argument>
         <argument key="host">victorbarcelo.net</argument>
@@ -2597,7 +2597,7 @@
                   <argument type="service" id="doctrine.dbal.logger"/>
                 </call>
                 <call method="addLogger">
-                  <argument type="service" id="doctrine.dbal.logger.profiling.temperature"/>
+                  <argument type="service" id="doctrine.dbal.logger.profiling.crocweb"/>
                 </call>
               </service>
             </argument>
@@ -2708,28 +2708,28 @@
       </argument>
       <configurator service="doctrine.orm.default_manager_configurator" method="configure"/>
     </service>
-    <service id="doctrine_cache.providers.doctrine.orm.temperature_metadata_cache" class="Doctrine\Common\Cache\ArrayCache">
+    <service id="doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache" class="Doctrine\Common\Cache\ArrayCache">
       <call method="setNamespace">
-        <argument>sf2orm_temperature_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4</argument>
+        <argument>sf2orm_crocweb_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4</argument>
       </call>
     </service>
-    <service id="doctrine_cache.providers.doctrine.orm.temperature_result_cache" class="Doctrine\Common\Cache\ArrayCache">
+    <service id="doctrine_cache.providers.doctrine.orm.crocweb_result_cache" class="Doctrine\Common\Cache\ArrayCache">
       <call method="setNamespace">
-        <argument>sf2orm_temperature_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4</argument>
+        <argument>sf2orm_crocweb_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4</argument>
       </call>
     </service>
-    <service id="doctrine_cache.providers.doctrine.orm.temperature_query_cache" class="Doctrine\Common\Cache\ArrayCache">
+    <service id="doctrine_cache.providers.doctrine.orm.crocweb_query_cache" class="Doctrine\Common\Cache\ArrayCache">
       <call method="setNamespace">
-        <argument>sf2orm_temperature_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4</argument>
+        <argument>sf2orm_crocweb_8370cc2595317db197bab7baee03d63cec2e418be37c14772f34acb27d029fc4</argument>
       </call>
     </service>
-    <service id="doctrine.orm.temperature_entity_listener_resolver" class="Doctrine\ORM\Mapping\DefaultEntityListenerResolver"/>
-    <service id="doctrine.orm.temperature_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
+    <service id="doctrine.orm.crocweb_entity_listener_resolver" class="Doctrine\ORM\Mapping\DefaultEntityListenerResolver"/>
+    <service id="doctrine.orm.crocweb_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.temperature_entity_manager" class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%">
-      <argument type="service" id="doctrine.dbal.temperature_connection"/>
+    <service id="doctrine.orm.crocweb_entity_manager" class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%">
+      <argument type="service" id="doctrine.dbal.crocweb_connection"/>
       <argument type="service">
         <service class="Doctrine\ORM\Configuration" public="false">
           <call method="setEntityNamespaces">
@@ -2738,13 +2738,13 @@
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
-            <argument type="service" id="doctrine_cache.providers.doctrine.orm.temperature_metadata_cache"/>
+            <argument type="service" id="doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache"/>
           </call>
           <call method="setQueryCacheImpl">
-            <argument type="service" id="doctrine_cache.providers.doctrine.orm.temperature_query_cache"/>
+            <argument type="service" id="doctrine_cache.providers.doctrine.orm.crocweb_query_cache"/>
           </call>
           <call method="setResultCacheImpl">
-            <argument type="service" id="doctrine_cache.providers.doctrine.orm.temperature_result_cache"/>
+            <argument type="service" id="doctrine_cache.providers.doctrine.orm.crocweb_result_cache"/>
           </call>
           <call method="setMetadataDriverImpl">
             <argument type="service">
@@ -2782,11 +2782,11 @@
             <argument type="service" id="doctrine.orm.naming_strategy.default"/>
           </call>
           <call method="setEntityListenerResolver">
-            <argument type="service" id="doctrine.orm.temperature_entity_listener_resolver"/>
+            <argument type="service" id="doctrine.orm.crocweb_entity_listener_resolver"/>
           </call>
         </service>
       </argument>
-      <configurator service="doctrine.orm.temperature_manager_configurator" method="configure"/>
+      <configurator service="doctrine.orm.crocweb_manager_configurator" method="configure"/>
     </service>
     <service id="sensio_framework_extra.view.guesser" class="Sensio\Bundle\FrameworkExtraBundle\Templating\TemplateGuesser">
       <argument type="service" id="kernel"/>
@@ -3320,9 +3320,9 @@
     <service id="doctrine.orm.default_metadata_cache" alias="doctrine_cache.providers.doctrine.orm.default_metadata_cache"/>
     <service id="doctrine.orm.default_result_cache" alias="doctrine_cache.providers.doctrine.orm.default_result_cache"/>
     <service id="doctrine.orm.default_query_cache" alias="doctrine_cache.providers.doctrine.orm.default_query_cache"/>
-    <service id="doctrine.orm.temperature_metadata_cache" alias="doctrine_cache.providers.doctrine.orm.temperature_metadata_cache"/>
-    <service id="doctrine.orm.temperature_result_cache" alias="doctrine_cache.providers.doctrine.orm.temperature_result_cache"/>
-    <service id="doctrine.orm.temperature_query_cache" alias="doctrine_cache.providers.doctrine.orm.temperature_query_cache"/>
+    <service id="doctrine.orm.crocweb_metadata_cache" alias="doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache"/>
+    <service id="doctrine.orm.crocweb_result_cache" alias="doctrine_cache.providers.doctrine.orm.crocweb_result_cache"/>
+    <service id="doctrine.orm.crocweb_query_cache" alias="doctrine_cache.providers.doctrine.orm.crocweb_query_cache"/>
     <service id="sensio.distribution.webconfigurator" alias="sensio_distribution.webconfigurator"/>
     <service id="console.command.sensiolabs_security_command_securitycheckercommand" alias="sensio_distribution.security_checker.command"/>
   </services>
