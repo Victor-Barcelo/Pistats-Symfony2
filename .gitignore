@@ -7,3 +7,6 @@
 # Parameters
 /app/config/parameters.yml
 /app/config/parameters.ini
+
+# sftp-config
+/sftp-config.json
