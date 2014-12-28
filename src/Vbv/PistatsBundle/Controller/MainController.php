@@ -75,7 +75,7 @@ class MainController extends Controller
             'dataLabels'    => array('enabled' => false),
             'showInLegend'  => false
         ));
-        $ob->title->text('Sensor: Fotoresistor generico');
+        $ob->title->text('Sensor: Fotoresistor genérico');
         $ob->xAxis->title(array('text'  => "Tiempo"));
         $ob->xAxis->type('datetime'); 
         $ob->yAxis->title(array('text'  => "Luminosidad"));
@@ -105,7 +105,6 @@ class MainController extends Controller
     public function notifyTemperatureAlertAction(Request $request)
     {
         $temperature = $request->request->get('temperature');
-        // $time = $request->request->get('time');
         $time = date("Y-m-d H:m:s",time());
         $emails = $this->getAlertEmails();
         $this->emailAlerts($emails, $temperature, $time);

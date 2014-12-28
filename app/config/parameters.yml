@@ -1,13 +1,13 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
-    database_host: 127.0.0.1
+    database_host: victorbarcelo.net
     database_port: null
-    database_name: pistats
-    database_user: pistats
-    database_password: plik
+    database_name: victorba_igni941
+    database_user: victorba_igni941
+    database_password: f(hP6(92S5
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
+    mailer_host: victorbarcelo.net
     mailer_user: null
     mailer_password: null
     locale: es

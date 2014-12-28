@@ -18,7 +18,7 @@ class appProdProjectContainer extends Container
             'kernel.root_dir' => dirname(dirname(__DIR__)),
             'kernel.environment' => 'prod',
             'kernel.debug' => false,
-            'kernel.name' => 'app',
+            'kernel.name' => 'ap_',
             'kernel.cache_dir' => __DIR__,
             'kernel.logs_dir' => (dirname(dirname(__DIR__)).'/logs'),
             'kernel.bundles' => array(
@@ -32,6 +32,7 @@ class appProdProjectContainer extends Container
                 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle',
                 'VbvPistatsBundle' => 'Vbv\\PistatsBundle\\VbvPistatsBundle',
                 'EndroidTwitterBundle' => 'Endroid\\Bundle\\TwitterBundle\\EndroidTwitterBundle',
+                'ObHighchartsBundle' => 'Ob\\HighchartsBundle\\ObHighchartsBundle',
             ),
             'kernel.charset' => 'UTF-8',
             'kernel.container_class' => 'appProdProjectContainer',
@@ -484,14 +485,14 @@ class appProdProjectContainer extends Container
             'doctrine.class' => 'Doctrine\\Bundle\\DoctrineBundle\\Registry',
             'doctrine.entity_managers' => array(
                 'default' => 'doctrine.orm.default_entity_manager',
-                'temperature' => 'doctrine.orm.temperature_entity_manager',
+                'crocweb' => 'doctrine.orm.crocweb_entity_manager',
             ),
             'doctrine.default_entity_manager' => 'default',
             'doctrine.dbal.connection_factory.types' => array(
             ),
             'doctrine.connections' => array(
                 'default' => 'doctrine.dbal.default_connection',
-                'temperature' => 'doctrine.dbal.temperature_connection',
+                'crocweb' => 'doctrine.dbal.crocweb_connection',
             ),
             'doctrine.default_connection' => 'default',
             'doctrine.orm.configuration.class' => 'Doctrine\\ORM\\Configuration',
@@ -555,6 +556,7 @@ class appProdProjectContainer extends Container
             'endroid.twitter.access_token' => '2881863592-iAQEp0OnHq6Q9Anu47ZRCnBbMjJuHXLUgdcTFyT',
             'endroid.twitter.access_token_secret' => 'Qqf4Z8uyRjevU3KYFEewsqLghvZRotGsIy3m3vlrTFnxU',
             'endroid.twitter.api_url' => NULL,
+            'ob_highcharts.twig_extension.class' => 'Ob\\HighchartsBundle\\Twig\\HighchartsExtension',
             'console.command.ids' => array(
             ),
         );
@@ -574,23 +576,23 @@ class appProdProjectContainer extends Container
             'debug.stopwatch' => 'getDebug_StopwatchService',
             'doctrine' => 'getDoctrineService',
             'doctrine.dbal.connection_factory' => 'getDoctrine_Dbal_ConnectionFactoryService',
+            'doctrine.dbal.crocweb_connection' => 'getDoctrine_Dbal_CrocwebConnectionService',
             'doctrine.dbal.default_connection' => 'getDoctrine_Dbal_DefaultConnectionService',
-            'doctrine.dbal.temperature_connection' => 'getDoctrine_Dbal_TemperatureConnectionService',
+            'doctrine.orm.crocweb_entity_listener_resolver' => 'getDoctrine_Orm_CrocwebEntityListenerResolverService',
+            'doctrine.orm.crocweb_entity_manager' => 'getDoctrine_Orm_CrocwebEntityManagerService',
+            'doctrine.orm.crocweb_manager_configurator' => 'getDoctrine_Orm_CrocwebManagerConfiguratorService',
             'doctrine.orm.default_entity_listener_resolver' => 'getDoctrine_Orm_DefaultEntityListenerResolverService',
             'doctrine.orm.default_entity_manager' => 'getDoctrine_Orm_DefaultEntityManagerService',
             'doctrine.orm.default_manager_configurator' => 'getDoctrine_Orm_DefaultManagerConfiguratorService',
             'doctrine.orm.naming_strategy.default' => 'getDoctrine_Orm_NamingStrategy_DefaultService',
-            'doctrine.orm.temperature_entity_listener_resolver' => 'getDoctrine_Orm_TemperatureEntityListenerResolverService',
-            'doctrine.orm.temperature_entity_manager' => 'getDoctrine_Orm_TemperatureEntityManagerService',
-            'doctrine.orm.temperature_manager_configurator' => 'getDoctrine_Orm_TemperatureManagerConfiguratorService',
             'doctrine.orm.validator.unique' => 'getDoctrine_Orm_Validator_UniqueService',
             'doctrine.orm.validator_initializer' => 'getDoctrine_Orm_ValidatorInitializerService',
+            'doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_CrocwebMetadataCacheService',
+            'doctrine_cache.providers.doctrine.orm.crocweb_query_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_CrocwebQueryCacheService',
+            'doctrine_cache.providers.doctrine.orm.crocweb_result_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_CrocwebResultCacheService',
             'doctrine_cache.providers.doctrine.orm.default_metadata_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultMetadataCacheService',
             'doctrine_cache.providers.doctrine.orm.default_query_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultQueryCacheService',
             'doctrine_cache.providers.doctrine.orm.default_result_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultResultCacheService',
-            'doctrine_cache.providers.doctrine.orm.temperature_metadata_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_TemperatureMetadataCacheService',
-            'doctrine_cache.providers.doctrine.orm.temperature_query_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_TemperatureQueryCacheService',
-            'doctrine_cache.providers.doctrine.orm.temperature_result_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_TemperatureResultCacheService',
             'endroid.twitter' => 'getEndroid_TwitterService',
             'event_dispatcher' => 'getEventDispatcherService',
             'file_locator' => 'getFileLocatorService',
@@ -657,6 +659,7 @@ class appProdProjectContainer extends Container
             'monolog.logger.router' => 'getMonolog_Logger_RouterService',
             'monolog.logger.security' => 'getMonolog_Logger_SecurityService',
             'monolog.logger.translation' => 'getMonolog_Logger_TranslationService',
+            'ob_highcharts.twig.highcharts_extension' => 'getObHighcharts_Twig_HighchartsExtensionService',
             'property_accessor' => 'getPropertyAccessorService',
             'request' => 'getRequestService',
             'request_stack' => 'getRequestStackService',
@@ -770,13 +773,13 @@ class appProdProjectContainer extends Container
         );
         $this->aliases = array(
             'database_connection' => 'doctrine.dbal.default_connection',
+            'doctrine.orm.crocweb_metadata_cache' => 'doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache',
+            'doctrine.orm.crocweb_query_cache' => 'doctrine_cache.providers.doctrine.orm.crocweb_query_cache',
+            'doctrine.orm.crocweb_result_cache' => 'doctrine_cache.providers.doctrine.orm.crocweb_result_cache',
             'doctrine.orm.default_metadata_cache' => 'doctrine_cache.providers.doctrine.orm.default_metadata_cache',
             'doctrine.orm.default_query_cache' => 'doctrine_cache.providers.doctrine.orm.default_query_cache',
             'doctrine.orm.default_result_cache' => 'doctrine_cache.providers.doctrine.orm.default_result_cache',
             'doctrine.orm.entity_manager' => 'doctrine.orm.default_entity_manager',
-            'doctrine.orm.temperature_metadata_cache' => 'doctrine_cache.providers.doctrine.orm.temperature_metadata_cache',
-            'doctrine.orm.temperature_query_cache' => 'doctrine_cache.providers.doctrine.orm.temperature_query_cache',
-            'doctrine.orm.temperature_result_cache' => 'doctrine_cache.providers.doctrine.orm.temperature_result_cache',
             'mailer' => 'swiftmailer.mailer.default',
             'session.storage' => 'session.storage.native',
             'swiftmailer.mailer' => 'swiftmailer.mailer.default',
@@ -828,19 +831,48 @@ class appProdProjectContainer extends Container
     }
     protected function getDoctrineService()
     {
-        return $this->services['doctrine'] = new \Doctrine\Bundle\DoctrineBundle\Registry($this, array('default' => 'doctrine.dbal.default_connection', 'temperature' => 'doctrine.dbal.temperature_connection'), array('default' => 'doctrine.orm.default_entity_manager', 'temperature' => 'doctrine.orm.temperature_entity_manager'), 'default', 'default');
+        return $this->services['doctrine'] = new \Doctrine\Bundle\DoctrineBundle\Registry($this, array('default' => 'doctrine.dbal.default_connection', 'crocweb' => 'doctrine.dbal.crocweb_connection'), array('default' => 'doctrine.orm.default_entity_manager', 'crocweb' => 'doctrine.orm.crocweb_entity_manager'), 'default', 'default');
     }
     protected function getDoctrine_Dbal_ConnectionFactoryService()
     {
         return $this->services['doctrine.dbal.connection_factory'] = new \Doctrine\Bundle\DoctrineBundle\ConnectionFactory(array());
     }
+    protected function getDoctrine_Dbal_CrocwebConnectionService()
+    {
+        return $this->services['doctrine.dbal.crocweb_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => 'victorbarcelo.net', 'port' => NULL, 'dbname' => 'victorba_igni941', 'user' => 'victorba_igni941', 'password' => 'f(hP6(92S5', 'charset' => 'UTF8', 'driverOptions' => array()), new \Doctrine\DBAL\Configuration(), new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+    }
     protected function getDoctrine_Dbal_DefaultConnectionService()
     {
         return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => '127.0.0.1', 'port' => NULL, 'dbname' => 'pistats', 'user' => 'pistats', 'password' => 'plik', 'charset' => 'UTF8', 'driverOptions' => array()), new \Doctrine\DBAL\Configuration(), new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
     }
-    protected function getDoctrine_Dbal_TemperatureConnectionService()
+    protected function getDoctrine_Orm_CrocwebEntityListenerResolverService()
     {
-        return $this->services['doctrine.dbal.temperature_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => 'victorbarcelo.net', 'port' => NULL, 'dbname' => 'victorba_igni941', 'user' => 'victorba_igni941', 'password' => 'f(hP6(92S5', 'charset' => 'UTF8', 'driverOptions' => array()), new \Doctrine\DBAL\Configuration(), new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        return $this->services['doctrine.orm.crocweb_entity_listener_resolver'] = new \Doctrine\ORM\Mapping\DefaultEntityListenerResolver();
+    }
+    protected function getDoctrine_Orm_CrocwebEntityManagerService()
+    {
+        $a = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
+        $a->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => (dirname(dirname(dirname(__DIR__))).'/src/Vbv/PistatsBundle/Entity'))), 'Vbv\\PistatsBundle\\Entity');
+        $b = new \Doctrine\ORM\Configuration();
+        $b->setEntityNamespaces(array('VbvPistatsBundle' => 'Vbv\\PistatsBundle\\Entity'));
+        $b->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache'));
+        $b->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.crocweb_query_cache'));
+        $b->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.crocweb_result_cache'));
+        $b->setMetadataDriverImpl($a);
+        $b->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
+        $b->setProxyNamespace('Proxies');
+        $b->setAutoGenerateProxyClasses(false);
+        $b->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $b->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $b->setNamingStrategy($this->get('doctrine.orm.naming_strategy.default'));
+        $b->setEntityListenerResolver($this->get('doctrine.orm.crocweb_entity_listener_resolver'));
+        $this->services['doctrine.orm.crocweb_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.crocweb_connection'), $b);
+        $this->get('doctrine.orm.crocweb_manager_configurator')->configure($instance);
+        return $instance;
+    }
+    protected function getDoctrine_Orm_CrocwebManagerConfiguratorService()
+    {
+        return $this->services['doctrine.orm.crocweb_manager_configurator'] = new \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator(array(), array());
     }
     protected function getDoctrine_Orm_DefaultEntityListenerResolverService()
     {
@@ -871,35 +903,6 @@ class appProdProjectContainer extends Container
     {
         return $this->services['doctrine.orm.default_manager_configurator'] = new \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator(array(), array());
     }
-    protected function getDoctrine_Orm_TemperatureEntityListenerResolverService()
-    {
-        return $this->services['doctrine.orm.temperature_entity_listener_resolver'] = new \Doctrine\ORM\Mapping\DefaultEntityListenerResolver();
-    }
-    protected function getDoctrine_Orm_TemperatureEntityManagerService()
-    {
-        $a = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
-        $a->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => (dirname(dirname(dirname(__DIR__))).'/src/Vbv/PistatsBundle/Entity'))), 'Vbv\\PistatsBundle\\Entity');
-        $b = new \Doctrine\ORM\Configuration();
-        $b->setEntityNamespaces(array('VbvPistatsBundle' => 'Vbv\\PistatsBundle\\Entity'));
-        $b->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.temperature_metadata_cache'));
-        $b->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.temperature_query_cache'));
-        $b->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.temperature_result_cache'));
-        $b->setMetadataDriverImpl($a);
-        $b->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
-        $b->setProxyNamespace('Proxies');
-        $b->setAutoGenerateProxyClasses(false);
-        $b->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $b->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $b->setNamingStrategy($this->get('doctrine.orm.naming_strategy.default'));
-        $b->setEntityListenerResolver($this->get('doctrine.orm.temperature_entity_listener_resolver'));
-        $this->services['doctrine.orm.temperature_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.temperature_connection'), $b);
-        $this->get('doctrine.orm.temperature_manager_configurator')->configure($instance);
-        return $instance;
-    }
-    protected function getDoctrine_Orm_TemperatureManagerConfiguratorService()
-    {
-        return $this->services['doctrine.orm.temperature_manager_configurator'] = new \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator(array(), array());
-    }
     protected function getDoctrine_Orm_Validator_UniqueService()
     {
         return $this->services['doctrine.orm.validator.unique'] = new \Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator($this->get('doctrine'));
@@ -907,6 +910,24 @@ class appProdProjectContainer extends Container
     protected function getDoctrine_Orm_ValidatorInitializerService()
     {
         return $this->services['doctrine.orm.validator_initializer'] = new \Symfony\Bridge\Doctrine\Validator\DoctrineInitializer($this->get('doctrine'));
+    }
+    protected function getDoctrineCache_Providers_Doctrine_Orm_CrocwebMetadataCacheService()
+    {
+        $this->services['doctrine_cache.providers.doctrine.orm.crocweb_metadata_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
+        $instance->setNamespace('sf2orm_crocweb_49d28db59fb562b662564d7c98abbeeb839e35eff510e8ada25a1986f312d2bf');
+        return $instance;
+    }
+    protected function getDoctrineCache_Providers_Doctrine_Orm_CrocwebQueryCacheService()
+    {
+        $this->services['doctrine_cache.providers.doctrine.orm.crocweb_query_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
+        $instance->setNamespace('sf2orm_crocweb_49d28db59fb562b662564d7c98abbeeb839e35eff510e8ada25a1986f312d2bf');
+        return $instance;
+    }
+    protected function getDoctrineCache_Providers_Doctrine_Orm_CrocwebResultCacheService()
+    {
+        $this->services['doctrine_cache.providers.doctrine.orm.crocweb_result_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
+        $instance->setNamespace('sf2orm_crocweb_49d28db59fb562b662564d7c98abbeeb839e35eff510e8ada25a1986f312d2bf');
+        return $instance;
     }
     protected function getDoctrineCache_Providers_Doctrine_Orm_DefaultMetadataCacheService()
     {
@@ -924,24 +945,6 @@ class appProdProjectContainer extends Container
     {
         $this->services['doctrine_cache.providers.doctrine.orm.default_result_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
         $instance->setNamespace('sf2orm_default_49d28db59fb562b662564d7c98abbeeb839e35eff510e8ada25a1986f312d2bf');
-        return $instance;
-    }
-    protected function getDoctrineCache_Providers_Doctrine_Orm_TemperatureMetadataCacheService()
-    {
-        $this->services['doctrine_cache.providers.doctrine.orm.temperature_metadata_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
-        $instance->setNamespace('sf2orm_temperature_49d28db59fb562b662564d7c98abbeeb839e35eff510e8ada25a1986f312d2bf');
-        return $instance;
-    }
-    protected function getDoctrineCache_Providers_Doctrine_Orm_TemperatureQueryCacheService()
-    {
-        $this->services['doctrine_cache.providers.doctrine.orm.temperature_query_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
-        $instance->setNamespace('sf2orm_temperature_49d28db59fb562b662564d7c98abbeeb839e35eff510e8ada25a1986f312d2bf');
-        return $instance;
-    }
-    protected function getDoctrineCache_Providers_Doctrine_Orm_TemperatureResultCacheService()
-    {
-        $this->services['doctrine_cache.providers.doctrine.orm.temperature_result_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
-        $instance->setNamespace('sf2orm_temperature_49d28db59fb562b662564d7c98abbeeb839e35eff510e8ada25a1986f312d2bf');
         return $instance;
     }
     protected function getEndroid_TwitterService()
@@ -1266,6 +1269,10 @@ class appProdProjectContainer extends Container
         $instance->pushHandler($this->get('monolog.handler.main'));
         return $instance;
     }
+    protected function getObHighcharts_Twig_HighchartsExtensionService()
+    {
+        return $this->services['ob_highcharts.twig.highcharts_extension'] = new \Ob\HighchartsBundle\Twig\HighchartsExtension();
+    }
     protected function getPropertyAccessorService()
     {
         return $this->services['property_accessor'] = new \Symfony\Component\PropertyAccess\PropertyAccessor(false, false);
@@ -1356,7 +1363,7 @@ class appProdProjectContainer extends Container
         $n->setProviderKey('main');
         $o = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $l, array(), $a);
         $o->setOptions(array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($k, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.chain_provider'), 1 => $this->get('security.user.provider.concrete.in_memory'), 2 => $this->get('security.user.provider.concrete.user_db')), 'main', $a, $c), 2 => $m, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $l, 'main', $n, $o, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '549084b74607f', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $k, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $l, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $l, '/login', false), NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($k, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.chain_provider'), 1 => $this->get('security.user.provider.concrete.in_memory'), 2 => $this->get('security.user.provider.concrete.user_db')), 'main', $a, $c), 2 => $m, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $l, 'main', $n, $o, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '549f3c14aca33', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $k, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $l, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $l, '/login', false), NULL, NULL, $a));
     }
     protected function getSecurity_PasswordEncoderService()
     {
@@ -1718,6 +1725,7 @@ class appProdProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig')), $this->get('form.csrf_provider', ContainerInterface::NULL_ON_INVALID_REFERENCE))));
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), false, array(), array(), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
         $instance->addExtension(new \Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension());
+        $instance->addExtension($this->get('ob_highcharts.twig.highcharts_extension'));
         $instance->addGlobal('app', $this->get('templating.globals'));
         return $instance;
     }
@@ -1803,7 +1811,7 @@ class appProdProjectContainer extends Container
     }
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.chain_provider'), new \Symfony\Component\Security\Core\User\UserChecker(), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('549084b74607f')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.chain_provider'), new \Symfony\Component\Security\Core\User\UserChecker(), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('549f3c14aca33')), true);
         $instance->setEventDispatcher($this->get('event_dispatcher'));
         return $instance;
     }
