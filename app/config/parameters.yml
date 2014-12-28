@@ -12,3 +12,9 @@ parameters:
     mailer_password: null
     locale: es
     secret: jhdlkjahsdlkjhaskljfhaskljfhaks
+    cw_database_driver: pdo_mysql
+    cw_database_host: victorbarcelo.net
+    cw_database_port: null
+    cw_database_name: victorba_igni941
+    cw_database_user: victorba_igni941
+    cw_database_password: f(hP6(92S5

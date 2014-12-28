@@ -57,12 +57,12 @@ doctrine:
                 password: "%database_password%"
                 charset:  UTF8
             crocweb:
-                driver:   'pdo_mysql'
-                host:     'victorbarcelo.net'
-                port:     null
-                dbname:   'victorba_igni941'
-                user:     'victorba_igni941'
-                password: 'f(hP6(92S5'
+                driver:   "%cw_database_driver%"
+                host:     "%cw_database_host%"
+                port:     "%cw_database_port%"
+                dbname:   "%cw_database_name%"
+                user:     "%cw_database_user%"
+                password: "%cw_database_password%"
                 charset:  UTF8
     orm:
         auto_generate_proxy_classes: %kernel.debug%

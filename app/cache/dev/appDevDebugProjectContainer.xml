@@ -38,6 +38,12 @@
     <parameter key="mailer_password">null</parameter>
     <parameter key="locale">es</parameter>
     <parameter key="secret">jhdlkjahsdlkjhaskljfhaskljfhaks</parameter>
+    <parameter key="cw_database_driver">pdo_mysql</parameter>
+    <parameter key="cw_database_host">victorbarcelo.net</parameter>
+    <parameter key="cw_database_port">null</parameter>
+    <parameter key="cw_database_name">victorba_igni941</parameter>
+    <parameter key="cw_database_user">victorba_igni941</parameter>
+    <parameter key="cw_database_password">f(hP6(92S5</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -1811,7 +1817,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>549ff8d0c7bf3</argument>
+            <argument>54a0004636c6d</argument>
           </service>
         </argument>
       </argument>
@@ -2114,7 +2120,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>549ff8d0c7bf3</argument>
+            <argument>54a0004636c6d</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
