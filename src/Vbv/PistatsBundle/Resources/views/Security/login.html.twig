@@ -2,18 +2,61 @@
     <div>{{ error.message }}</div>
 {% endif %}
 
-<form action="{{ path('login_check') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pistats Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/pistats/css/login.css') }}">
+  </head>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
+  <body>
 
-    {#
-        If you want to control the URL the user
-        is redirected to on success (more details below)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
+    <div class="container">
 
-    <button type="submit">login</button>
-</form>
+        <form class="form-signin" action="{{ path('login_check') }}" method="post">
+            <h2 class="form-signin-heading">Pistats</h2>
+            <label for="username" class="sr-only">Login</label>
+            <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" />
+            <label for="password" class="sr-only">Password:</label>
+            <input type="password" id="password" class="form-control" name="_password" />
+            {#
+                If you want to control the URL the user
+                is redirected to on success (more details below)
+                <input type="hidden" name="_target_path" value="/account" />
+            #}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+        </form>
+
+    </div> <!-- /container -->
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+  </body>
+
+
+{# 
+      <form class="form-signin" role="form" method="post">
+        <h2 class="form-signin-heading">Pistats</h2>
+        <label for="inputText" class="sr-only">Login</label>
+        <input type="text" id="inputText" class="form-control" placeholder="Login" name ="login" required autofocus value="<?php echo set_value('login'); ?>">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required value="<?php echo set_value('password'); ?>">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+      </form>
+
+      <?php if (isset($login_error) && $login_error): ?>
+        <div class="alert alert-danger" role="alert">Error. Login o Password incorrectos</div>
+      <?php endif ?>
+ #}
